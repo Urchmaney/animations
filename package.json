@@ -8,13 +8,20 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "@motion-canvas/core": "^3.16.0",
     "@motion-canvas/2d": "^3.16.0",
-    "@motion-canvas/ffmpeg": "^1.1.0"
+    "@motion-canvas/core": "^3.16.0",
+    "@motion-canvas/ffmpeg": "^1.1.0",
+    "three": "^0.165.0",
+    "@lezer/java": "^1.1.1",
+    "@lezer/javascript": "^1.4.13",
+    "@lezer/python": "^1.1.11",
+    "@lezer/rust": "^1.0.2",
+    "@lezer/yaml": "^1.0.2"
   },
   "devDependencies": {
     "@motion-canvas/ui": "^3.16.0",
     "@motion-canvas/vite-plugin": "^3.15.1",
+    "@types/three": "^0.165.0",
     "typescript": "^5.2.2",
     "vite": "^4.0.0"
   }
