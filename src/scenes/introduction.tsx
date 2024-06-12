@@ -33,6 +33,10 @@ export default makeScene2D(function* (view) {
     );
 
 
+    yield* slideTransition(Direction.Right);
+
+    
+
     
 
     yield* spring(PlopSpring, -300, 30, 2, val => {

@@ -1,0 +1,18 @@
+{
+  "version": 0,
+  "timeEvents": [
+    {
+      "name": "next_and_previous",
+      "targetTime": 3.0925024338361244
+    },
+    {
+      "name": "next_takes",
+      "targetTime": 6.154747037148256
+    },
+    {
+      "name": "clicking_prev",
+      "targetTime": 9.801792056692202
+    }
+  ],
+  "seed": 3884755609
+}
