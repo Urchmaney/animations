@@ -81,7 +81,7 @@ export default makeScene2D(function* (view: View2D) {
     // )
 
     for(let i = 0; i < pageOneLoaders.length; i++) {
-      yield loop(() => pageOneLoaders[i].fill("aab8c2", 0.5).back(0.5))
+      yield loop(() => pageOneLoaders[i].fill("aab8c2", 1).back(1))
     }
 
     yield* waitUntil("next_and_previous");
