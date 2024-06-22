@@ -41,9 +41,9 @@ import {
     Tetrahedron,
     Three,
     Window,
-  } from '../nodes';
-  import {Theme} from '../styles/styles';
-  import * as gameThree from '../three/game';
+  } from '../assets/nodes';
+  import {Theme} from '../assets/styles/styles';
+  import * as gameThree from '../assets/three/game';
   
   const theme = {
     ...Theme,
