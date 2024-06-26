@@ -11,6 +11,7 @@ import {makeProject} from '@motion-canvas/core';
 // import ptry from './scenes/try?scene';
 // import audio from './audio/listAudio.mp3'
 
-import linkedListProject from './linked-list-project'
+import linkedListProject from './linked-list-project';
+import blazerProject from './blazer-project';
 
-export default makeProject(linkedListProject);
+export default makeProject(blazerProject);
