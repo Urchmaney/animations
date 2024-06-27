@@ -1,7 +1,7 @@
 import { Camera, Img, Line, Rect, Txt, View2D, makeScene2D } from "@motion-canvas/2d";
 import blazerImage from "../images/blazer.png"
 import { PossibleVector2, ThreadGenerator, all, createRef, waitFor } from "@motion-canvas/core";
-import dashboardImage from "../images/dashboard.png";
+import dashboardImage from "../images/dashboards.png";
 
 export default makeScene2D(function* (view) {
     const cameraRef = createRef<Camera>();
@@ -15,14 +15,14 @@ export default makeScene2D(function* (view) {
 
     // yield* blazerImg().scale(3, 3).back(0.5);
     view.add(
-        <Camera ref={cameraRef}>
+        <Camera ref={cameraRef} position={[-400, 500]}>
             <Img width={() => view.width()} height={() => view.height()} ref={dashoardRef} src={dashboardImage} />
         </Camera>
     )
 
-    yield* cameraRef().position([300, 400], 0.9)
+    yield* cameraRef().position([0, 0], 0.9);
     yield* waitFor(2);
-})
+})  
 
 
 function* animateBlazerLogo (view: View2D): ThreadGenerator {
@@ -69,5 +69,12 @@ function* animateBlazerLogo (view: View2D): ThreadGenerator {
         titleRef().text("Blazer", 1)
     );
 
-    yield* waitFor(2);
+    yield* all(
+        waitFor(2),
+        boxRef().end(0, 1),
+        boxLineRef().end(0, 1),
+        titleRef().text("", 1)
+    );
+
+    yield
 }
