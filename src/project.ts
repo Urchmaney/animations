@@ -13,5 +13,8 @@ import {makeProject} from '@motion-canvas/core';
 
 import linkedListProject from './linked-list-project';
 import blazerProject from './blazer-project';
+import { Code, LezerHighlighter } from '@motion-canvas/2d';
+import { parser } from "@lezer/python";
+Code.defaultHighlighter = new LezerHighlighter(parser)
 
 export default makeProject(blazerProject);
