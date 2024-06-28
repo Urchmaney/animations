@@ -1,5 +1,5 @@
 import { CODE, Code, CodeSignal, Layout, Rect, Txt, makeScene2D } from "@motion-canvas/2d";
-import { Direction, Reference, SimpleSignal, all, createRef, createSignal, slideTransition, waitFor } from "@motion-canvas/core";
+import { Direction, Reference, SimpleSignal, all, createRef, createSignal, delay, slideTransition, waitFor } from "@motion-canvas/core";
 import { VSCode } from "../../assets/nodes/VSCode";
 
 export default makeScene2D(function* (view) {
@@ -36,6 +36,10 @@ export default makeScene2D(function* (view) {
                       isFile: true
                     }
                   ]
+                },
+                {
+                  name: "routes.rb",
+                  isFile: true
                 }
               ]
             },
@@ -92,13 +96,39 @@ export default makeScene2D(function* (view) {
   yield* waitFor(1);
   yield* all(
     vscodeRef().addFileTo("Ramen/config", "blazer.yml", 1),
+    codeRef().code(blazerConfigEditor(), 1),
     vscodeRef().addFileTo("Ramen/db/migrations", "200493004343_blazer.rb", 1),
     vscodeRef().addFileTo("Ramen/db/migrations", "200493004344_blazer.rb", 1),
   )
-  yield* waitFor(2);
+  yield* all(
+    waitFor(2),
+    codeRef().code(blazerMigration(), 1),
+  )
   yield* vscodeRef().submitToTerminal("rails db:migrate", 1);
-  yield* waitFor(2);
+
+  newGemSignal("")
+  yield* waitFor(8);
+
+  yield* all(
+    vscodeRef().highlightTree("Ramen/config/routes.rb", 1),
+    codeRef().code(routeFile(newGemSignal), 1)
+  )
+
+  const urlSignal = Code.createSignal("biz-analytics");
+  yield* all(
+    waitFor(1),
+    newGemSignal(CODE`mount Blazer::Engine, at: '${urlSignal}'`, 1)
+  )
+
+  yield* waitFor(2)
  
+  yield* all(
+    codeRef().selection(codeRef().findAllRanges(/biz-analytics'/gi), 3).back(2),
+    // codeRef().code.replace(codeRef().findAllRanges(/biz-analytics'/gi)[0], "another_url", 0.6)
+    delay(1.5, urlSignal("another_url", 1).back(1))
+  )
+
+  yield* waitFor(2)
 })
 
 
@@ -187,11 +217,7 @@ function gemFile(s: CodeSignal<void>) {
 }
 
 function blazerConfigEditor () {
-  return (
-    <Code
-      fontSize={20}
-      fill={"gray"}
-      code={`
+  return CODE`
   data_sources:
   main:
     url: <%%= ENV["BLAZER_DATABASE_URL"] %>
@@ -269,9 +295,7 @@ check_schedules:
 #   url: <%%= ENV["BLAZER_UPLOADS_URL"] %>
 #   schema: uploads
 #   data_source: main      
-  `}
-    />
-  )
+  `
 }
 
 function blazerMigration() {
@@ -322,4 +346,13 @@ def change
   end
 end
 `
+}
+
+function routeFile(newRoute: CodeSignal<void>) {
+  return CODE`
+  Ramen::Engine.routes.draw do
+    ${newRoute}
+    resources :users
+  end
+  `
 }
