@@ -2,7 +2,7 @@ import { Img, JSX, Layout, Rect, RectProps, Txt, is } from "@motion-canvas/2d";
 import dropDownImg from "../../assets/images/dropDown.svg";
 import rubyImg from "../../assets/images/ruby.png";
 import rightArrowImg from "../../assets/images/arrowRight.svg";
-import { ThreadGenerator, createRef, makeRef, range, waitFor } from "@motion-canvas/core";
+import { ThreadGenerator, all, createRef, makeRef, range, waitFor } from "@motion-canvas/core";
 
 type FolderTree = {
   name: string,
@@ -17,6 +17,7 @@ export interface VSCodeProps extends RectProps {
 export class VSCode extends Rect {
   private sidebarLayoutsRefs: { [key: string]: Rect } = {};
   public readonly terminal: Layout;
+  public readonly activeTerminalLine: Layout;
 
   public constructor({ sideBarTree, children, ...props }: VSCodeProps) {
     super({
@@ -74,11 +75,17 @@ export class VSCode extends Rect {
             </Layout>
             <Layout height={"85%"} padding={10} paddingTop={10} ref={makeRef(this, 'terminal')} direction={"column"}>
 
-              <Layout gap={10}>
+              <Layout gap={10} ref={makeRef(this, "activeTerminalLine")}>
                 <Txt fill={"white"} fontSize={18} text="C:\Users\Lenovo\Documents\test\ramen>   " />
                 <Txt fill={"yellow"} fontSize={18} text="" />
               </Layout>
-
+              {
+                range(6).map(() => (
+                  <Layout>
+                    <Txt fill={"white"} fontSize={18} text="" />
+                  </Layout>
+                ))
+              }
 
             </Layout>
           </Rect>
@@ -90,10 +97,23 @@ export class VSCode extends Rect {
   * writeToTerminal(content: string, time: number): ThreadGenerator {
     const layout = this.terminal.findFirst<Layout>(is(Layout));
     const txt = layout.findLast(is(Txt));
-    yield* txt.text(`${txt.text()}${content}`, time)
+    yield* txt.text(`${txt.text()}${content}`, time);
   }
 
-  * addFileTo(folder: string, fileName: string, time: number) : ThreadGenerator {
+  * submitToTerminal(content: string, time: number): ThreadGenerator {
+    yield* this.writeToTerminal(content, time);
+    const txts = this.terminal.findAll(is(Txt));
+    yield* all(
+      ...txts.slice(2).map(tx => tx.text(".", time / 2))
+    )
+  
+    yield* waitFor(1);
+    yield* all(
+      ...txts.slice(1).map(tx => tx.text("", time / 2))
+    )
+  }
+
+  * addFileTo(folder: string, fileName: string, time: number): ThreadGenerator {
     if (folder[0] !== "/") folder = `/${folder}`;
     const folderRect = this.sidebarLayoutsRefs[folder];
     folderRect.add(
@@ -105,14 +125,14 @@ export class VSCode extends Rect {
   * highlightTree(id: string, time: number): ThreadGenerator {
     if (id[0] !== "/") id = `/${id}`;
 
-    yield* this.sidebarLayoutsRefs[id].findFirst<Rect>(is(Rect)).fill("red", time).back(time);
+    yield* this.sidebarLayoutsRefs[id].findFirst<Rect>(is(Rect)).fill("lightgray", time).back(time);
   }
 }
 
 function VSCodeSideBar(sidebarTree: FolderTree, key: string, refs: { [key: string]: Layout }): JSX.Element {
   const currentKey = `${key}/${sidebarTree.name}`;
   return (
-    <Rect ref={makeRef(refs, currentKey)} layout direction={"column"}  paddingLeft={20}>
+    <Rect ref={makeRef(refs, currentKey)} layout direction={"column"} paddingLeft={20}>
       <Rect layout gap={10} paddingTop={10} paddingBottom={10}>
         {!sidebarTree.isFile && sidebarTree.children?.length && <Img src={dropDownImg} size={14} />}
         {!sidebarTree.isFile && !sidebarTree.children?.length && <Img src={rightArrowImg} size={14} />}
@@ -122,7 +142,7 @@ function VSCodeSideBar(sidebarTree: FolderTree, key: string, refs: { [key: strin
         </Layout>
       </Rect>
       {
-        sidebarTree.children?.length && 
+        sidebarTree.children?.length &&
         <>
           {
             sidebarTree.children.map(t => VSCodeSideBar(t, currentKey, refs))
