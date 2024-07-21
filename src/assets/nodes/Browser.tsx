@@ -63,4 +63,8 @@ export class Browser extends Rect {
     )
   }
 
+  * navigateToUrl(url: string, node: Node, time: number) {
+    yield* this.url.text(url, time);
+    this.setPage(node);
+  }
 }
