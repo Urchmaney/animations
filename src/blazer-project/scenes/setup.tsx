@@ -3,7 +3,7 @@ import { Direction, Reference, SimpleSignal, all, createRef, createSignal, delay
 import { VSCode } from "../../assets/nodes/VSCode";
 
 export default makeScene2D(function* (view) {
-  yield* slideTransition(Direction.Left, 1);
+  yield* slideTransition(Direction.Left, .5);
   const vscodeRef = createRef<VSCode>();
   const gemBlazerRef = createRef<Txt>();
   const codeRef = createRef<Code>();
@@ -88,10 +88,10 @@ export default makeScene2D(function* (view) {
   yield* all(
     codeRef().selection(codeRef().findAllRanges(/gem 'blazer'/gi), 0.5).back(0.5),
     // gemBlazerRef().text("gem 'blazer'", 2),
-    vscodeRef().highlightTree("Ramen/Gemfile", 1)
+    vscodeRef().highlightTree("Ramen/Gemfile", .5)
   )
-  yield* vscodeRef().submitToTerminal("bundle install", 1);
-  yield* waitFor(1);
+  yield* vscodeRef().submitToTerminal("bundle install", .5);
+  yield* waitFor(.5);
   yield* vscodeRef().submitToTerminal("rails generate blazer:install", 1);
   yield* waitFor(1);
   yield* all(

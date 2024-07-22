@@ -1,6 +1,6 @@
-import { Camera, Img, Line, Rect, Txt, View2D, makeScene2D } from "@motion-canvas/2d";
+import { Camera, Circle, CubicBezier, Img, Layout, Line, Rect, Spline, Txt, View2D, makeScene2D } from "@motion-canvas/2d";
 import blazerImage from "../images/blazer.png"
-import { PossibleVector2, ThreadGenerator, all, createRef, waitFor } from "@motion-canvas/core";
+import { PossibleVector2, Reference, ThreadGenerator, all, createRef, loop, makeRef, range, waitFor } from "@motion-canvas/core";
 import dashboardImage from "../images/dashboards.png";
 
 export default makeScene2D(function* (view) {
@@ -13,19 +13,43 @@ export default makeScene2D(function* (view) {
 
     yield* animateBlazerLogo(view);
 
-    // yield* blazerImg().scale(3, 3).back(0.5);
+    const dashboardRef = createRef<Rect>();
     view.add(
-        <Camera ref={cameraRef} position={[-400, 500]}>
-            <Img width={() => view.width()} height={() => view.height()} ref={dashoardRef} src={dashboardImage} />
-        </Camera>
+        <Rect layout fill={"gray"} ref={dashboardRef} gap={50} padding={50} radius={20}>
+
+        </Rect>
     )
 
-    yield* cameraRef().position([0, 0], 0.9);
+    const bars: Rect[] = [];
+
+    charts(dashboardRef(), bars);
+
+    const curve = createRef<CubicBezier>()
+
+    AddLineChart(dashboardRef(), curve)
+
+    yield  all(
+        ...bars.map(b => loop(() => b.height(Math.floor(Math.random() * 51) + 170, 1).back(1))),
+        curve().end(1, 3)
+    )
+    
+    // AddPieChart(dashboardRef(), []);
+
+    
+
+    // yield* blazerImg().scale(3, 3).back(0.5);
+    // view.add(
+    //     <Camera ref={cameraRef} position={[-400, 500]}>
+    //         <Img width={() => view.width()} height={() => view.height()} ref={dashoardRef} src={dashboardImage} />
+    //     </Camera>
+    // )
+
+    // yield* cameraRef().position([0, 0], 0.9);
     yield* waitFor(2);
-})  
+})
 
 
-function* animateBlazerLogo (view: View2D): ThreadGenerator {
+function* animateBlazerLogo(view: View2D): ThreadGenerator {
     const boxRef = createRef<Line>()
     const boxLineRef = createRef<Line>();
     const logo = createRef<Rect>();
@@ -43,7 +67,7 @@ function* animateBlazerLogo (view: View2D): ThreadGenerator {
                 stroke={'#fff'}
                 lineWidth={5}
                 end={0}
-             />,
+            />,
             <Line
                 ref={boxRef}
                 points={boxPoints}
@@ -53,7 +77,7 @@ function* animateBlazerLogo (view: View2D): ThreadGenerator {
                 end={0}
                 marginLeft={-90}
                 marginTop={10}
-             />
+            />
         </Rect>
     );
 
@@ -63,7 +87,7 @@ function* animateBlazerLogo (view: View2D): ThreadGenerator {
     );
 
     view.add(<Txt ref={titleRef} position={[15, 180]} fill={"#fff"} fontSize={90} />)
-    
+
     yield* all(
         logo().scale(3, 1),
         titleRef().text("Blazer", 1)
@@ -76,5 +100,58 @@ function* animateBlazerLogo (view: View2D): ThreadGenerator {
         titleRef().text("", 1)
     );
 
-    yield
+}
+
+function charts(view: Rect, bars: Rect[]) {
+
+    view.add(
+        <Rect gap={20} layout fill={"white"} paddingRight={5} paddingTop={5} height={300} width={500} rotation={180}>
+            <Rect gap={20} layout fill={"gray"} padding={15} width={"100%"}>
+                {
+                    range(5).map(
+                        (_, i) => (
+                            <Rect height={() => Math.floor(Math.random() * 50) + 130} width={80} fill={"lightgray"} ref={makeRef(bars, i)} offsetY={-1} />
+                        )
+                    )
+                }
+            </Rect>
+        </Rect>
+    )
+}
+
+function AddPieChart(view: Rect, pies: Rect[]) {
+    view.add(
+        <Circle
+            width={() => 120}
+            height={() => 120}
+            stroke={'#ff6470'}
+            lineWidth={4}
+            startAngle={110}
+            endAngle={340}
+            fill={'black'}
+        />
+    )
+}
+
+function AddLineChart(view: Rect, curve: Reference<CubicBezier>) {
+    view.add(
+        <Rect gap={20} layout fill={"white"} paddingRight={5} paddingTop={5} width={500} height={300} rotation={180}>
+            <Rect fill={"gray"} padding={15} width={"100%"} >
+
+
+                <CubicBezier
+                    ref={curve}
+                    lineWidth={10}
+                    stroke={'lightseagreen'}
+                    p0={[300, 100]}
+                    p2={[100, -100]}
+                    p1={[200, 100]}
+                    p3={[700, -100]}
+                    position={[-10, -10]}
+                    end={0}
+                />
+
+            </Rect>
+        </Rect>
+    )
 }
