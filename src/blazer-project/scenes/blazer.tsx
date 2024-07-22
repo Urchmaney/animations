@@ -4,8 +4,8 @@ import { PossibleVector2, Reference, ThreadGenerator, all, createRef, loop, make
 import dashboardImage from "../images/dashboards.png";
 
 export default makeScene2D(function* (view) {
-    const cameraRef = createRef<Camera>();
-    const dashoardRef = createRef<Img>();
+    // const cameraRef = createRef<Camera>();
+    // const dashoardRef = createRef<Img>();
     // const blazerImg = createRef<Img>()
     // view.add(
     //     <Img src={blazerImage} ref={blazerImg} />
@@ -110,7 +110,7 @@ function charts(view: Rect, bars: Rect[]) {
                 {
                     range(5).map(
                         (_, i) => (
-                            <Rect height={() => Math.floor(Math.random() * 50) + 130} width={80} fill={"lightgray"} ref={makeRef(bars, i)} offsetY={-1} />
+                            <Rect height={() => Math.floor(Math.random() * 50) + 130} width={80} fill={"0e0c0a"} ref={makeRef(bars, i)} offsetY={-1} />
                         )
                     )
                 }
@@ -119,19 +119,19 @@ function charts(view: Rect, bars: Rect[]) {
     )
 }
 
-function AddPieChart(view: Rect, pies: Rect[]) {
-    view.add(
-        <Circle
-            width={() => 120}
-            height={() => 120}
-            stroke={'#ff6470'}
-            lineWidth={4}
-            startAngle={110}
-            endAngle={340}
-            fill={'black'}
-        />
-    )
-}
+// function AddPieChart(view: Rect, pies: Rect[]) {
+//     view.add(
+//         <Circle
+//             width={() => 120}
+//             height={() => 120}
+//             stroke={'#ff6470'}
+//             lineWidth={4}
+//             startAngle={110}
+//             endAngle={340}
+//             fill={'black'}
+//         />
+//     )
+// }
 
 function AddLineChart(view: Rect, curve: Reference<CubicBezier>) {
     view.add(

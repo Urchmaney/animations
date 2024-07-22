@@ -2,8 +2,12 @@
   "version": 0,
   "timeEvents": [
     {
+      "name": "click_new",
+      "targetTime": 13.824585827491044
+    },
+    {
       "name": "userMeodel",
-      "targetTime": 18.668488084353516
+      "targetTime": 21.49307391184456
     }
   ],
   "seed": 1775159776
