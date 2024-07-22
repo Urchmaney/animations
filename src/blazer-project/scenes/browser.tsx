@@ -1,11 +1,12 @@
 import { Img, Line, makeScene2D, Rect, Txt } from "@motion-canvas/2d"
-import { createRef, Direction, slideTransition, waitFor } from "@motion-canvas/core";
+import { createRef, Direction, slideTransition, waitFor, waitUntil } from "@motion-canvas/core";
 import { Browser } from "../../assets/nodes/Browser";
 import railsHomeImg from "../images/screenshot_1.png";
 import blazerHomeImg from "../images/screenshot_2.png";
 import blazerCreateProject from "../images/screenshot_3.png"
 import blazerWithResult from "../images/screenshot_5.png";
-
+import blazerSaved from "../images/screenshot_6.png";
+import blazerHomeSaved from "../images/screenshot_7.png";
 
 export default makeScene2D(function* (view) {
   const browser = createRef<Browser>();
@@ -55,6 +56,7 @@ export default makeScene2D(function* (view) {
     1
   )
 
+  yield* waitUntil("userMeodel")
 
   view.add(
     <Rect width="100%" height="100%" fill="black" zIndex={5} opacity={0.9} ref={userRectRef}>
@@ -90,7 +92,7 @@ export default makeScene2D(function* (view) {
     </Rect>
   )
 
-  yield* waitFor(2);
+  yield* waitFor(5);
 
   userRectRef().remove();
 
@@ -120,15 +122,39 @@ export default makeScene2D(function* (view) {
     </Txt>
   )
 
-  yield* nameTxt().text("DOB", 2);
+  yield* waitFor(3);
+
+  yield* nameTxt().text("July Users", 2);
 
   view.add(
     <Txt ref={descTxt} position={[357, -190]} fill="black" zIndex={7} fontSize={24} textAlign="left" offsetX={-1} fontWeight={5}>
     </Txt>
   )
 
-  yield* descTxt().text("DOB", 2);
-  yield* waitFor(20);
+  yield* descTxt().text("All Users Birth on july", 2);
+
+  
+  lineRef().points(
+    [
+      [735, -55],
+      [900, -55],
+      [900, 30],
+      [735, 30],
+      [735, -55]
+    ]
+  )
+  
+  yield* lineRef().end(1, 1).back(1);
+
+
+  queryTxt().remove();
+  nameTxt().remove();
+  descTxt().remove();
+  yield* browser().navigateToUrl("http://localhost:3000/biz-analytics/queries/user_1", <Img src={blazerSaved} width="100%" height="100%"/>, 1)
+  yield* waitFor(5);
+  
+  yield* browser().navigateToUrl("http://localhost:3000/biz-analytics", <Img src={blazerHomeSaved} width="100%" height="100%"/>, 1)
+  yield* waitFor(2);
 
  
 
