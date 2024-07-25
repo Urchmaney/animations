@@ -1,7 +1,7 @@
 import { Img, Rect, Txt, makeScene2D } from "@motion-canvas/2d";
 import { DEFAULT, Direction, PlopSpring, all, createRef, slideTransition, spring, waitFor } from "@motion-canvas/core";
-import codeOrck from "../assets/images/orcks.png";
-import chain from "../assets/images/chain.png"
+import codeOrck from "../../assets/images/orcks.png";
+import chain from "../../assets/images/chain.png"
 
 export default makeScene2D(function* (view) {
     const board = createRef<Rect>();

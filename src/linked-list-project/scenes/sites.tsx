@@ -1,5 +1,5 @@
 import { Bezier, Img, QuadBezier, Rect, Txt, is, makeScene2D } from "@motion-canvas/2d";
-import codeOrck from "../assets/images/orcks.png";
+import codeOrck from "../../assets/images/orcks.png";
 import { DEFAULT, Direction, SimpleSignal, Vector2, all, createRef, createSignal, makeRef, range, slideTransition, waitFor } from "@motion-canvas/core";
 
 const studentPositions: [number, number][] = [
