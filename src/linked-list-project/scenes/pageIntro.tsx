@@ -1,5 +1,5 @@
 import { Layout, Rect, View2D, makeScene2D, Txt, Img, fillRect } from "@motion-canvas/2d";
-import { Window } from "../assets/nodes/window";
+import { Window } from "../../assets/nodes/window";
 import { Reference, all, createRef, loop, makeRef, range, waitFor, waitUntil } from "@motion-canvas/core";
 import ruby from "../assets/images/ruby.png";
 
