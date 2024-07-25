@@ -7,8 +7,8 @@ export default defineConfig({
     motionCanvas({ 
       project: [
         // './src/test-scenes/project.ts',
-        './src/blazer-project/project.ts',
-        //  './src/linked-list-project/project.ts'
+        // './src/blazer-project/project.ts',
+         './src/linked-list-project/project.ts'
       ] }),
     ffmpeg(),
   ],
