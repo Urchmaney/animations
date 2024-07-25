@@ -48,6 +48,7 @@ export default makeScene2D(function* (view) {
     />,
   )
 
+  yield* waitUntil("click_new")
   yield* lineRef().end(1, .5).back(.5);
 
   yield* browser().navigateToUrl(

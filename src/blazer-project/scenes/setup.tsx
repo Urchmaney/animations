@@ -128,7 +128,7 @@ export default makeScene2D(function* (view) {
     delay(1.5, urlSignal("another_url", 1).back(1))
   )
 
-  yield* waitFor(2)
+  yield* waitFor(3)
 })
 
 
