@@ -1,6 +1,6 @@
 import { Img, Txt, makeScene2D } from "@motion-canvas/2d";
 import { Direction, all, createRef, slideTransition, waitFor } from "@motion-canvas/core";
-import codeOrck from "../assets/images/orcks.png";
+import codeOrck from "../../assets/images/orcks.png";
 
 export default makeScene2D(function* (view) {
     const orcks = createRef<Img>();
