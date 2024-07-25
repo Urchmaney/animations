@@ -5,7 +5,4 @@ import conclusion from './conclusion?scene';
 import pageIntro from './pageIntro?scene';
 import audio from './audio/listAudio.mp3';
 
-export default {
-    scenes: [pageIntro, introduction, sites, conclusion],
-    audio: audio
-}
+export default [pageIntro, introduction, sites, conclusion];

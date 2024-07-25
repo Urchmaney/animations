@@ -15,7 +15,7 @@ export default makeScene2D(function* (view) {
 
     const dashboardRef = createRef<Rect>();
     view.add(
-        <Rect layout fill={"gray"} ref={dashboardRef} gap={50} padding={50} radius={20}>
+        <Rect layout fill={"lightgray"} ref={dashboardRef} gap={50} padding={50} radius={20}>
 
         </Rect>
     )
@@ -106,11 +106,11 @@ function charts(view: Rect, bars: Rect[]) {
 
     view.add(
         <Rect gap={20} layout fill={"white"} paddingRight={5} paddingTop={5} height={300} width={500} rotation={180}>
-            <Rect gap={20} layout fill={"gray"} padding={15} width={"100%"}>
+            <Rect gap={20} layout fill={"lightgray"} padding={15} width={"100%"}>
                 {
                     range(5).map(
                         (_, i) => (
-                            <Rect height={() => Math.floor(Math.random() * 50) + 130} width={80} fill={"lightgray"} ref={makeRef(bars, i)} offsetY={-1} />
+                            <Rect height={() => Math.floor(Math.random() * 50) + 130} width={80} fill={"#D2042D"} ref={makeRef(bars, i)} offsetY={-1} />
                         )
                     )
                 }
@@ -136,7 +136,7 @@ function AddPieChart(view: Rect, pies: Rect[]) {
 function AddLineChart(view: Rect, curve: Reference<CubicBezier>) {
     view.add(
         <Rect gap={20} layout fill={"white"} paddingRight={5} paddingTop={5} width={500} height={300} rotation={180}>
-            <Rect fill={"gray"} padding={15} width={"100%"} >
+            <Rect fill={"lightgray"} padding={15} width={"100%"} >
 
 
                 <CubicBezier

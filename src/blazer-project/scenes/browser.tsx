@@ -28,7 +28,7 @@ export default makeScene2D(function* (view) {
     <Img src={blazerHomeImg} width="100%" height="100%"/>
   )
 
-  yield* waitFor(10);
+  yield* waitUntil("createOne");
   
 
   view.add(
@@ -122,16 +122,16 @@ export default makeScene2D(function* (view) {
     </Txt>
   )
 
-  yield* waitFor(3);
+  yield* waitUntil("Name");
 
-  yield* nameTxt().text("July Users", 2);
+  yield* nameTxt().text("July Users", 1);
 
   view.add(
     <Txt ref={descTxt} position={[357, -190]} fill="black" zIndex={7} fontSize={24} textAlign="left" offsetX={-1} fontWeight={5}>
     </Txt>
   )
 
-  yield* descTxt().text("All Users Birth on july", 2);
+  yield* descTxt().text("All Users Birth on july", 1);
 
   
   lineRef().points(
@@ -151,7 +151,7 @@ export default makeScene2D(function* (view) {
   nameTxt().remove();
   descTxt().remove();
   yield* browser().navigateToUrl("http://localhost:3000/biz-analytics/queries/user_1", <Img src={blazerSaved} width="100%" height="100%"/>, 1)
-  yield* waitFor(5);
+  yield* waitFor(3);
   
   yield* browser().navigateToUrl("http://localhost:3000/biz-analytics", <Img src={blazerHomeSaved} width="100%" height="100%"/>, 1)
   yield* waitFor(2);

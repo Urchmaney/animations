@@ -38,9 +38,8 @@ export class VSCode extends Rect {
           paddingTop={10}
           direction={"column"}
         >
-          {
-            VSCodeSideBar(sideBarTree, "", this.sidebarLayoutsRefs)
-          }
+          
+          <VSCodeSideBar sidebarTree={sideBarTree} key="" refs={this.sidebarLayoutsRefs} />
         </Rect>
         <Rect
           width={"80%"}
@@ -117,7 +116,7 @@ export class VSCode extends Rect {
     if (folder[0] !== "/") folder = `/${folder}`;
     const folderRect = this.sidebarLayoutsRefs[folder];
     folderRect.add(
-      VSCodeSideBar({ name: fileName, isFile: true }, folder, this.sidebarLayoutsRefs)
+      <VSCodeSideBar sidebarTree={{ name: fileName, isFile: true }} key={folder} refs={this.sidebarLayoutsRefs} />
     )
     yield* this.sidebarLayoutsRefs[`${folder}/${fileName}`].findFirst<Rect>(is(Rect)).fill("lightgreen", time).back(time)
   }
@@ -129,13 +128,19 @@ export class VSCode extends Rect {
   }
 }
 
-function VSCodeSideBar(sidebarTree: FolderTree, key: string, refs: { [key: string]: Layout }): JSX.Element {
+interface VSCodeSideBarProp {
+  sidebarTree: FolderTree
+  key: string
+  refs: { [key: string]: Layout }
+}
+
+function VSCodeSideBar({sidebarTree, key, refs }: VSCodeSideBarProp): JSX.Element {
   const currentKey = `${key}/${sidebarTree.name}`;
   return (
     <Rect ref={makeRef(refs, currentKey)} layout direction={"column"} paddingLeft={20}>
       <Rect layout gap={10} paddingTop={10} paddingBottom={10}>
         {!sidebarTree.isFile && sidebarTree.children?.length && <Img src={dropDownImg} size={14} />}
-        {!sidebarTree.isFile && !sidebarTree.children?.length && <Img src={rightArrowImg} size={14} />}
+        {!sidebarTree.isFile && !sidebarTree.children?.length && <Img src={rightArrowImg} size={14} />} 
         <Layout gap={5}>
           {sidebarTree.isFile && <Img src={rubyImg} size={14} />}
           <Txt fontSize={14} fill={"white"}>{sidebarTree.name}</Txt>
@@ -145,7 +150,7 @@ function VSCodeSideBar(sidebarTree: FolderTree, key: string, refs: { [key: strin
         sidebarTree.children?.length &&
         <>
           {
-            sidebarTree.children.map(t => VSCodeSideBar(t, currentKey, refs))
+            sidebarTree.children.map(t => <VSCodeSideBar sidebarTree={t} key={currentKey} refs={refs} />)
           }
         </>
       }
