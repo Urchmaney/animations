@@ -4,12 +4,10 @@ import ffmpeg from '@motion-canvas/ffmpeg';
 
 export default defineConfig({
   plugins: [
-    motionCanvas({ 
-      project: [
-        // './src/test-scenes/project.ts',
-        // './src/blazer-project/project.ts',
-         './src/linked-list-project/project.ts'
-      ] }),
+    motionCanvas({
+        project: "./src/**/*_project.ts"
+      }
+    ),
     ffmpeg(),
   ],
 });
