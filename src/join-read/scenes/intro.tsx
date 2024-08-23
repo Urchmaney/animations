@@ -6,18 +6,18 @@ export default makeScene2D(function* (view) {
     const coolReadingVideoRef = createRef<Video>();
     const welcomeLayoutRef = createRef<Layout>();
     view.add(
-        <Video src={coolReadingVideo} ref={coolReadingVideoRef} />        
+        <Video src={coolReadingVideo} ref={coolReadingVideoRef} width={"100%"} height={"100%"} />        
     );
 
     view.add(
-        <Rect width={() => view.width()} height={() => view.height()} fill={"#000"} opacity={0.4} zIndex={2} />
+        <Rect width={"100%"} height={"100%"} fill={"#000"} opacity={0.5} zIndex={2} />
     )
     coolReadingVideoRef().play();
     view.add(
-        <Rect layout y={-1350} x={-1000} direction={"column"} gap={20} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >Come Join Us</Txt>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250}>At</Txt>
-            <Txt fill={"#FFF"} fontWeight={700} fontSize={550}>BreQu</Txt>
+        <Rect layout y={-450} x={-500} direction={"column"} gap={20} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >Come Join Us</Txt>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50}>At</Txt>
+            <Txt fill={"#FFF"} fontWeight={700} fontSize={100}>BreQu</Txt>
         </Rect>
         
         // <Txt fill={"#008080"} fontWeight={700} fontSize={250} y={-1550} >Come Join Us</Txt>
@@ -31,8 +31,8 @@ export default makeScene2D(function* (view) {
     welcomeLayoutRef().remove();
 
     view.add(
-        <Rect layout y={-1350} x={0} direction={"column"} gap={20} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >Suggest A book</Txt>
+        <Rect layout y={-450} x={0} direction={"column"} gap={20} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >Suggest A book</Txt>
         </Rect>
     )
 
@@ -41,10 +41,10 @@ export default makeScene2D(function* (view) {
     welcomeLayoutRef().remove();
 
     view.add(
-        <Rect layout y={-1350} x={0} direction={"column"} gap={25} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >And</Txt>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >We read as a</Txt>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >GROUP</Txt>
+        <Rect layout y={-450} x={0} direction={"column"} gap={25} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >And</Txt>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >We read as a</Txt>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >GROUP</Txt>
         </Rect>
     )
     
@@ -54,15 +54,15 @@ export default makeScene2D(function* (view) {
 
     const lineRef = createRef<Rect>()
     view.add(
-        <Rect layout y={-1350} x={0} direction={"column"} gap={25} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
-            <Txt fill={"#fccb06"} fontWeight={700} fontSize={250} >Go to</Txt>
-            <Rect layout direction={"column"} gap={25}>
-                <Txt fill={"#fff"} fontWeight={700} fontSize={250}>http://brequ.com</Txt>
-                <Rect height={30} width={0} fill={"#fff"} size={30} ref={lineRef} />
+        <Rect layout y={-450} x={0} direction={"column"} gap={25} textAlign={"center"} ref={welcomeLayoutRef} zIndex={3}>
+            <Txt fill={"#fccb06"} fontWeight={700} fontSize={50} >Go to</Txt>
+            <Rect layout direction={"column"} gap={15}>
+                <Txt fill={"#fff"} fontWeight={700} fontSize={50}>http://brequ.com</Txt>
+                <Rect height={10} width={0} fill={"#fff"} size={30} ref={lineRef} />
             </Rect>
         </Rect>
     )
-    yield* lineRef().width(2000, 2);
+    yield* lineRef().width(400, 2);
 
    yield* waitFor(2);
 })
