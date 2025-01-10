@@ -75,7 +75,7 @@ export class VSCode extends Rect {
             <Layout height={"85%"} padding={10} paddingTop={10} ref={makeRef(this, 'terminal')} direction={"column"}>
 
               <Layout gap={10} ref={makeRef(this, "activeTerminalLine")}>
-                <Txt fill={"white"} fontSize={18} text="C:\Users\Lenovo\Documents\test\ramen>   " />
+                <Txt fill={"white"} fontSize={18} text={`C:\\Users\\Lenovo\\Documents\\test\\ramen>   `} />
                 <Txt fill={"yellow"} fontSize={18} text="" />
               </Layout>
               {

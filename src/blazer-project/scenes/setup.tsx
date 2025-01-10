@@ -1,6 +1,8 @@
 import { CODE, Code, CodeSignal, Layout, Rect, Txt, makeScene2D } from "@motion-canvas/2d";
 import { Direction, Reference, SimpleSignal, all, createRef, createSignal, delay, slideTransition, waitFor } from "@motion-canvas/core";
 import { VSCode } from "../../assets/nodes/VSCode";
+import { Paper } from "../../assets/nodes";
+import { routeFile, sideBarTree } from "../assets/blazer_vscode";
 
 export default makeScene2D(function* (view) {
   yield* slideTransition(Direction.Left, .5);
@@ -13,56 +15,7 @@ export default makeScene2D(function* (view) {
   view.add(
     <VSCode
       ref={vscodeRef}
-      sideBarTree={
-        {
-          name: "Ramen",
-          children: [
-            {
-              name: "app",
-              children: [
-                {
-                  name: "model"
-                }
-              ]
-            },
-            {
-              name: "config",
-              children: [
-                {
-                  name: "initializers",
-                  children: [
-                    {
-                      name: "file.rb",
-                      isFile: true
-                    }
-                  ]
-                },
-                {
-                  name: "routes.rb",
-                  isFile: true
-                }
-              ]
-            },
-            {
-              name: "db",
-              children: [
-                {
-                  name: "migrations",
-                  children: [
-                    {
-                      name: "2094043095_create_user.rb",
-                      isFile: true
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              name: "Gemfile",
-              isFile: true
-            }
-          ]
-        }}
+      sideBarTree={sideBarTree}
       height={() => view.height()}
       width={() => view.width()}
     >
@@ -75,6 +28,7 @@ export default makeScene2D(function* (view) {
           code={gemFile(newGemSignal)}
 
         />
+        
         {/* {gemFileEditor(gemBlazerRef)} */}
         {/* { blazerConfigEditor() } */}
       </Rect>
@@ -346,13 +300,4 @@ def change
   end
 end
 `
-}
-
-function routeFile(newRoute: CodeSignal<void>) {
-  return CODE`
-  Ramen::Engine.routes.draw do
-    ${newRoute}
-    resources :users
-  end
-  `
 }
