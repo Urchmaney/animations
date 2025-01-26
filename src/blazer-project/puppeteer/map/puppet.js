@@ -43,8 +43,111 @@ file = `demo_${++count}.png`;
 await page.screenshot({
     path: join(directory, file)
 });
+pngFiles.push(file);
+
+await page.goto('https://blazer.dokkuapp.com/queries/2-smart-column');
+await page.waitForNetworkIdle()
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
 pngFiles.push(file)
 
+await page.goto('https://blazer.dokkuapp.com/queries/1-smart-variable/');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file)
+
+await page.locator(".selectize-input").click()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+
+await page.locator(".option.active").click()
+await page.waitForNavigation({waitUntil: 'networkidle2'})
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+await page.goto('https://blazer.dokkuapp.com/queries/3-linked-column');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+await page.goto('https://blazer.dokkuapp.com/queries/17-pie-chart');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+await page.goto('https://blazer.dokkuapp.com/queries/16-scatter-chart');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+
+await page.goto('https://blazer.dokkuapp.com/queries/10-check-for-bad-data');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+
+await page.goto('https://blazer.dokkuapp.com/queries/11-check-for-missing-data');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+
+await page.goto('https://blazer.dokkuapp.com/queries/19-cohort-analysis-from-first-order');
+await page.waitForNetworkIdle()
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
+
+
+
+await page.goto('https://blazer.dokkuapp.com/queries/new');
+await page.waitForNetworkIdle();
+await page.locator(".selectize-control.single").click();
+
+
+file = `demo_${++count}.png`;
+await page.screenshot({
+    path: join(directory, file)
+});
+pngFiles.push(file);
 
 await browser.close();
 
