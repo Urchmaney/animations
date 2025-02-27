@@ -14,3 +14,7 @@ dist
 *.sln
 *.sw?
 *.meta
+*.mp3
+*.mov
+*.mp4
+*.webm

@@ -27,7 +27,10 @@ export default makeScene2D(function* (view) {
     blazerLogo().height(150, 1),
     titleTxt().position.y(titleTxt().y() - 40, 1),
     subTitleTxt().position.y(subTitleTxt().y() - 40, 1),
-    subTitleTxt().text("Queries and Dashboards (Basic Authentication)", 1)
+    subTitleTxt().text("Queries and Dashboards (Authentication - Custom)", 1)
   )
 
+  yield* orckLogo.rotation(0, 1);
+
 })
+

@@ -36,7 +36,7 @@ export class BlazerLogo extends Rect {
                         this.bottomLeft().addX((this.width() / 100) * 55).addY((this.height() / 100) * -45),
                         this.bottomLeft().addX((this.width() / 100) * 70).addY((this.height() / 100) * -70),
                         this.bottomLeft().addX((this.width() / 100) * 95).addY((this.height() / 100) * -7),
-                        this.bottomLeft().addX((this.width() / 100) * 3).addY((this.height() / 100) * -7),
+                        this.bottomLeft().addX((this.width() / 100) * 4).addY((this.height() / 100) * -7),
                     ]}
                     stroke={'#fff'}
                     lineWidth={5}
