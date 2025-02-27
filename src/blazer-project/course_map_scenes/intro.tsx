@@ -80,7 +80,7 @@ export default makeScene2D(function* (view) {
     blazerLogo().height(150, 1),
     titleTxt().position.y(titleTxt().y() - 40, 1),
     subTitleTxt().position.y(subTitleTxt().y() - 40, 1),
-    subTitleTxt().text("( Structure / Map )", 1)
+    subTitleTxt().text("Queries and Dashboards (Introduction)", 1)
   )
   yield* waitFor(5)
 });

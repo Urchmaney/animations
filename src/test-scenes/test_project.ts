@@ -10,6 +10,7 @@ import pageIntro from './scenes/pageIntro?scene';
 import ptry from './scenes/try?scene';
 
 
+console.log(example)
 
 
 export default makeProject({

@@ -1,0 +1,15 @@
+import demo_1 from "./demo_1.png?url"
+import demo_2 from "./demo_2.png?url"
+import demo_3 from "./demo_3.png?url"
+import demo_4 from "./demo_4.png?url"
+import demo_5 from "./demo_5.png?url"
+import demo_6 from "./demo_6.png?url"
+import demo_7 from "./demo_7.png?url"
+import demo_8 from "./demo_8.png?url"
+import demo_9 from "./demo_9.png?url"
+import demo_10 from "./demo_10.png?url"
+import demo_11 from "./demo_11.png?url"
+import demo_12 from "./demo_12.png?url"
+import demo_13 from "./demo_13.png?url"
+
+export default [demo_1, demo_2, demo_3, demo_4, demo_5, demo_6, demo_7, demo_8, demo_9, demo_10, demo_11, demo_12, demo_13]

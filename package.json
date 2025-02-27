@@ -5,22 +5,27 @@
   "scripts": {
     "start": "vite",
     "serve": "vite",
+    "puppet": "node src/blazer-project/puppeteer/map/puppet.js",
     "build": "tsc && vite build"
   },
+
   "dependencies": {
     "@lezer/java": "^1.1.1",
     "@lezer/javascript": "^1.4.17",
     "@lezer/python": "^1.1.11",
     "@lezer/rust": "^1.0.2",
     "@lezer/yaml": "^1.0.2",
-    "@motion-canvas/2d": "^3.16.0",
-    "@motion-canvas/core": "^3.16.0",
+    "@motion-canvas/2d": "^3.17.1",
+    "@motion-canvas/core": "^3.17.0",
     "@motion-canvas/ffmpeg": "^1.1.0",
+    "puppeteer": "^24.0.0",
+    "svg-parser": "^2.0.4",
     "three": "^0.165.0"
   },
   "devDependencies": {
     "@motion-canvas/ui": "^3.16.0",
     "@motion-canvas/vite-plugin": "^3.15.1",
+    "@types/svg-parser": "^2.0.6",
     "@types/three": "^0.165.0",
     "typescript": "^5.2.2",
     "vite": "^4.0.0"
