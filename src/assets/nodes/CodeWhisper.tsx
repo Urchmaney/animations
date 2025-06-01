@@ -21,7 +21,7 @@ export class CodeWhisper extends Layout {
     const { codeProps, codeBoxProps, speakerTxtProps, ...others } = props
     super({ layout: true, direction: "column", gap: 10, ...others });
 
-    const codeboxProps = { ...({ padding: 50, fill: "#2a2727", gap: 0,  grow: 1, width: "100%", layout: true, direction: "column" })as RectProps, ...(codeBoxProps || {}) }
+    const codeboxProps = { ...({ padding: 50, fill: "#2a2727", gap: 0,  width: "100%", layout: true, direction: "column" })as RectProps, ...(codeBoxProps || {}) }
     this.add(
       <>
         <Rect width={100} height={100}>
@@ -36,7 +36,7 @@ export class CodeWhisper extends Layout {
             </Layout>
             <Code  {...codeProps} ref={makeRef(this, "code")} />
           </Rect>
-          <Rect fill={"black"}>
+          <Rect fill={"black"} grow={1} paddingTop={50}>
             <Terminal ref={makeRef(this, "terminalBox")}></Terminal>
           </Rect>
         </Layout>
